@@ -1,0 +1,19 @@
+.auth-form {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 40px;
+  border: 1px solid #ddd;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  background: #fff;
+}
+
+/* Add media query for screens smaller than 600px (adjust the breakpoint as needed) */
+@media (max-width: 600px) {
+  .auth-form {
+    max-width: 250px; /* Adjust to take full width on smaller screens */
+    margin: 20px auto; /* Adjust margin for smaller screens */
+    padding: 20px; /* Adjust padding for smaller screens */
+    box-shadow: none; /* Remove box-shadow on smaller screens for a cleaner look */
+  }
+}

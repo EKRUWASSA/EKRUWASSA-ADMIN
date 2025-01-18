@@ -1,0 +1,77 @@
+.navbar {
+  width: 100%;
+  margin: 0 0rem 10rem 0rem;
+  padding: 30px 0px;
+  box-sizing: border-box;
+}
+
+.navbar ul {
+  display: flex;
+  margin: 0 20rem 0 20rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  color: var(--heading-color);
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  /* margin-left: 30rem; */
+  /* margin-right: auto; */
+  cursor: pointer;
+}
+
+.navbar .auth-div {
+  display: flex;
+  gap: 4px;
+}
+
+.logo-flex {
+  display: flex;
+  align-items: center;
+  margin: auto;
+}
+
+.navbar .logo img {
+  /* margin-right: 10px; */
+
+  /* filter: invert(25%); */
+  width: 36px;
+  margin-top: -8px;
+}
+.navbar a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+@media (max-width: 900px) {
+  .navbar ul {
+    margin: 0 10px; /* Adjusted margin for better spacing on smaller screens */
+    max-width: 100%; /* Full width on smaller screens */
+  }
+}
+
+@media (max-width: 720px) {
+  .navbar ul {
+    /* Stack navigation items vertically on smaller screens */
+    text-align: center; /* Center the text in each item */
+  }
+
+  .navbar .logo,
+  .auth-div {
+    margin: auto; /* Center the logo and auth-div on smaller screens */
+  }
+
+  .navbar .auth-div {
+    margin-top: 10px; /* Add some space above the auth-div on smaller screens */
+  }
+}
+
+@media (max-width: 620px) {
+  .navbar ul {
+    margin: 0 10px; /* Adjusted margin for better spacing on even smaller screens */
+  }
+}

@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="oui:ml-create-single-metric-job" clip-path="url(#clip0_30_35)">
+<path id="Vector" d="M16 32C7.163 32 0 24.837 0 16C0 7.163 7.163 0 16 0C24.837 0 32 7.163 32 16C32 20.2435 30.3143 24.3131 27.3137 27.3137C24.3131 30.3143 20.2435 32 16 32ZM16 2C8.268 2 2 8.268 2 16C2 23.732 8.268 30 16 30C23.732 30 30 23.732 30 16C30 12.287 28.525 8.72601 25.8995 6.1005C23.274 3.475 19.713 2 16 2Z" fill="#737791"/>
+<path id="Vector_2" d="M23 15H17V9H15V15H9V17H15V23H17V17H23V15Z" fill="#737791"/>
+</g>
+<defs>
+<clipPath id="clip0_30_35">
+<rect width="32" height="32" fill="white"/>
+</clipPath>
+</defs>
+</svg>
