@@ -42,7 +42,7 @@ const Dashboard = () => {
   }, [documents, currentFilter, user.uid]);
 
   return (
-    <div className="dashboard w-[90%] pages-margin">
+    <div className="dashboard w-[80%] pl-5 pages-margin">
       {error && <p className="error">{error}</p>}
       {documents && (
         <div>

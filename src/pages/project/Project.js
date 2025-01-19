@@ -18,7 +18,7 @@ export default function Project() {
   }
 
   return (
-    <div className="project-details w-[90%] pages-margin">
+    <div className="project-details w-[80%] pl-5 pages-margin">
       <nav className="navbar">
         <NavLink
           to=""

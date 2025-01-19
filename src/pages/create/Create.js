@@ -91,7 +91,7 @@ export default function Create() {
   };
 
   return (
-    <div className="create-form pages-margin">
+    <div className="create-form pl-5 pages-margin">
       {/* <h2 className="page-title">Create new project</h2> */}
       <form onSubmit={handleSubmit}>
         <label>

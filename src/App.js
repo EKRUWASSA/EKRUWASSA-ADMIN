@@ -35,7 +35,7 @@ function App() {
         <BrowserRouter>
           {user && <Sidebar />}
 
-          <div className="container">
+          <div className="containe w-full ">
             <Navbar />
 
             <Routes>
