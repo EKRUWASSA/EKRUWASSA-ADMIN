@@ -14,9 +14,9 @@ export default function Login() {
   };
 
   return (
-    <div className={`app-container ${isPending ? 'blurred' : ''}`}>
-      <form className="auth-form" onSubmit={handleSubmit}>
-        <h2>SIGN IN AS ADMIN</h2>
+    <div className={`app-container w-full ${isPending ? 'blurred' : ''}`}>
+      <form className="bg-white rounded-xl  p-10 mx-auto w-[700px] " onSubmit={handleSubmit}>
+        <div className="text-3xl font-bold">SIGN IN AS ADMIN</div>
         <label>
           <span>Email:</span>
           <input
