@@ -3,6 +3,7 @@ import Temple from "../assets/temple.png";
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+
 export default function Navbar() {
   const { logout, isPending } = useLogout();
   const { user } = useAuthContext();
