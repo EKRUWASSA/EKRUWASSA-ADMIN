@@ -1,5 +1,3 @@
-// Sidebar.js
-
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Avatar from "./Avatar";
@@ -35,6 +33,11 @@ export default function Sidebar() {
 
   return (
     <>
+      {isPending && (
+        <div className="full-page-loading-modal">
+          <img src={loadingGif} alt="Loading" className="loading-gif" />
+        </div>
+      )}
       {width <= mobileBreakpoint && (
         <div className="menu-icon" onClick={toggleSidebar}>
           <img src={MenuIcon} alt="Menu Icon" className="menuu" />
@@ -56,7 +59,6 @@ export default function Sidebar() {
                   </div>
                 </NavLink>
               </li>
-              {/* {user && } */}
               <li>
                 <NavLink to="/create">
                   <div className="link">
@@ -85,11 +87,6 @@ export default function Sidebar() {
                     <div className="signout" disabled>
                       <img src={SignoutIcon} alt="signout icon" />
                       <div>Sign out</div>
-                    </div>
-                  )}
-                  {isPending && (
-                    <div className="loading-modal">
-                      <img src={loadingGif} alt="Loading" className="loading-gif" />
                     </div>
                   )}
                 </li>

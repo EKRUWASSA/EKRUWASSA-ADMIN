@@ -75,6 +75,34 @@
   justify-content: center;
 }
 
+.loading-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1100; /* Ensure the loading modal is on top of everything */
+}
+
+.full-page-loading-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+
+
 .menu-icon {
   display: none;
   position: fixed;
@@ -133,18 +161,6 @@
   margin-top: 20px;
 }
 
-.loading-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-}
 
 @media (max-width: 720px) {
   .sidebar {
