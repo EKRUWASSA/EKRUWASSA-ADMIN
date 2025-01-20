@@ -24,8 +24,9 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          username: ${{ secrets.SERVER_USERNAME }}
           script: |
-            cd /EKRUWASSA-ADMIN
+            cd EKRUWASSA-ADMIN
             chmod +x ./deploy.sh && ./deploy.sh
 
       - name: Post-deployment check
