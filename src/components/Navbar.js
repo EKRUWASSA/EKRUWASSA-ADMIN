@@ -9,7 +9,7 @@ export default function Navbar() {
   console.log({ user });
   console.log(isPending);
   return (
-    <nav className="navbar">
+    <nav className="navbar ">
       <ul>
       <li className="logo">
   <Link to="/">
