@@ -30,7 +30,7 @@ export default function Project() {
           Summary
         </NavLink>
         <NavLink
-          to="tasks"
+          to="tasks" // relative path
           className={({ isActive }) =>
             isActive ? "nav-icon active" : "nav-icon"
           }
@@ -38,7 +38,7 @@ export default function Project() {
           Tasks
         </NavLink>
         <NavLink
-          to="comments"
+          to="comments" // relative path
           className={({ isActive }) =>
             isActive ? "nav-icon active" : "nav-icon"
           }
