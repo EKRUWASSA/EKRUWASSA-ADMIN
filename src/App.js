@@ -35,7 +35,7 @@ function App() {
         <BrowserRouter>
           {user && <Sidebar />}
 
-          <div className="containe w-full ">
+          <div className="containe w-full">
             <Navbar />
 
             <Routes>
@@ -49,23 +49,22 @@ function App() {
               />
               <Route
                 path="/users"
-                element={user ? <OnlineUsers/> : <Navigate to="/login" />}
+                element={user ? <OnlineUsers /> : <Navigate to="/login" />}
               />
               <Route
                 path="/signup"
-                element={!user ? <Signup /> : <Navigate to="/signup" />}
+                element={!user ? <Signup /> : <Navigate to="/" />}
               />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
               />
               <Route
-                path="/projects/:id"
+                path="/projects/:id/*" // Note the addition of /* to allow child routes
                 element={user ? <Project /> : <Navigate to="/login" />}
               />
             </Routes>
           </div>
-          {/* {user && width > breakpoint && <OnlineUsers />} */}
         </BrowserRouter>
       )}
     </div>

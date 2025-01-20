@@ -21,7 +21,7 @@ export default function Project() {
     <div className="project-details w-[80%] pl-5 pages-margin">
       <nav className="navbar">
         <NavLink
-          to=""
+          to={`/projects/${id}`} // Absolute path to project summary
           end
           className={({ isActive }) =>
             isActive ? "nav-icon active" : "nav-icon"
@@ -30,7 +30,7 @@ export default function Project() {
           Summary
         </NavLink>
         <NavLink
-          to="tasks" // relative path
+          to={`/projects/${id}/tasks`} // Absolute path to tasks
           className={({ isActive }) =>
             isActive ? "nav-icon active" : "nav-icon"
           }
@@ -38,7 +38,7 @@ export default function Project() {
           Tasks
         </NavLink>
         <NavLink
-          to="comments" // relative path
+          to={`/projects/${id}/comments`} // Absolute path to comments
           className={({ isActive }) =>
             isActive ? "nav-icon active" : "nav-icon"
           }
