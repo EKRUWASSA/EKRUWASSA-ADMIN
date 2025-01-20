@@ -19,7 +19,8 @@ import Avatar from "../../components/Avatar";
 import { timestamp, projectStorage } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useFirestore } from "../../hooks/useFirestore";
-import { v4 as uuid } from "uuid";
+// import { v4 as uuid } from "uuid";
+
 const ImageModal = ({ imageUrl, onClose }) => {
   if (!imageUrl) return null;
 
