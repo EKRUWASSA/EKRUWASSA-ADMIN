@@ -22,8 +22,8 @@ jobs:
       - name: Application startup Test
         run: |
           npm run dev &  # Start the app in the background
-          sleep 10      
-          curl -I http://localhost:5174 || exit 1  # Check if the app is responding (adjust port if needed)
+          sleep 5    
+          curl http://localhost:5174 || exit 1  # Check if the app is responding (adjust port if needed)
           pkill -f "npm run dev"  # Stop the running app
 
       - name: Deploy to Server
