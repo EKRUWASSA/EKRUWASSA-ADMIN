@@ -23,6 +23,8 @@ export default function ProjectsList({ projects }) {
         />
       </div>
 
+      
+
       {/* Project List */}
       <div className="project-list">
         {filteredProjects.length === 0 && <p>There are no projects yet</p>}

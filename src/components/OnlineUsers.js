@@ -8,6 +8,7 @@ import Users from '../assets/users.png';
 import "./OnlineUsers.css";
 
 export default function OnlineUsers() {
+  const [searchQuery, setSearchQuery] = useState("");
   const { error, documents } = useCollection("users");
   const { user } = useAuthContext();
   const [selectedUser, setSelectedUser] = useState(null);
@@ -105,11 +106,22 @@ export default function OnlineUsers() {
   className="email-textarea"
 />
 
+
+
           <button className="add-email-button" onClick={handleAddUser} disabled={loading}>
-            {loading ? "Adding..." : "Add Email(s)"} {/* Change button text based on loading state */}
+            {loading ? "Adding..." : "Add Email(s)"} 
           </button>
           {addError && <p className="error">{addError}</p>}
         </div>
+      </div>
+
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
 
       <div className="user-list" ref={dropdownRef}>
@@ -117,7 +129,10 @@ export default function OnlineUsers() {
         {error && <div className="error">{error}</div>}
         {documents &&
           documents
-            .filter((currentUser) => currentUser.id !== user.uid)
+            .filter((currentUser) =>
+              currentUser.id !== user.uid &&
+              currentUser.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+            )
             .map((user) => (
               <div
                 key={user.id}
