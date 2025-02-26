@@ -122,10 +122,10 @@ export default function OnlineUsers() {
                 className="user-list-item"
                 onClick={() => handleClick(user)}
               >
-                <Avatar src={user.photoURL} onClick={() => handleImageClick(user.photoURL)} />
+                <Avatar src={user.photoURL} displayName={user.displayName}  onClick={() => handleImageClick(user.photoURL)} />
                 <div className="user-info">
                   <span>{user.displayName}</span>
-                  <span className="user-email">{user.email}</span> {/* Display email */}
+                  <span className="user-email">{user.email}</span> 
                 </div>
               </div>
             ))}

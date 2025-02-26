@@ -414,10 +414,10 @@
 
 .subtask {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   margin-bottom: 1rem;
   flex-direction: row;
-  width: 42px;
+  width: 100%;
 }
 
 .subtask input {

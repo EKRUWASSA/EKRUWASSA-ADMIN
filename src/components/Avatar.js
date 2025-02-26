@@ -1,10 +1,22 @@
-// styles
-import "./Avatar.css";
+export default function Avatar({ src, displayName }) {
+  // Function to get initials from displayName
+  const getInitials = (name) => {
+    if (!name) return "U"; // Default to 'U' if no name is provided
+    const initials = name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
+    return initials;
+  };
 
-export default function Avatar({ src }) {
   return (
     <div className="avatar">
-      <img src={src} alt="avatar of the user"></img>
+      {src ? (
+        <img src={src} alt={getInitials(displayName)} />
+      ) : (
+        <div className="avatar-placeholder">{getInitials(displayName)}</div>
+      )}
     </div>
   );
 }
