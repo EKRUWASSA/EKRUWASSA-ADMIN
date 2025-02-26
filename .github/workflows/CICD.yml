@@ -3,7 +3,7 @@ name: Deploy Frontend App
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
@@ -20,7 +20,11 @@ jobs:
         run: npm install
 
       - name: Application startup Test
-        run: npm run dev
+        run: |
+          npm run dev &  # Start the app in the background
+          sleep 5    
+          curl http://localhost:5173 || exit 1  # Check if the app is responding (adjust port if needed)
+          pkill -f "npm run dev"  # Stop the running app
 
       - name: Deploy to Server
         uses: appleboy/ssh-action@v1.0.3
