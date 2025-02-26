@@ -1,22 +1,15 @@
+import "./Avatar.css";
+
 export default function Avatar({ src, displayName }) {
-  // Function to get initials from displayName
-  const getInitials = (name) => {
-    if (!name) return "U"; // Default to 'U' if no name is provided
-    const initials = name
-      .split(" ")
-      .map((word) => word[0])
-      .join("")
-      .toUpperCase();
-    return initials;
+  const getInitialsImage = (name) => {
+    if (!name) return "https://ui-avatars.com/api/?name=User&background=random";
+    const formattedName = name.replace(/\s+/g, "+"); // Convert spaces to '+'
+    return `https://ui-avatars.com/api/?name=${formattedName}&background=random`;
   };
 
   return (
     <div className="avatar">
-      {src ? (
-        <img src={src} alt={getInitials(displayName)} />
-      ) : (
-        <div className="avatar-placeholder">{getInitials(displayName)}</div>
-      )}
+      <img src={src || getInitialsImage(displayName)} alt={displayName} />
     </div>
   );
 }

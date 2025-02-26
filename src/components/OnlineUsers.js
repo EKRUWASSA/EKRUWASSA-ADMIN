@@ -86,10 +86,12 @@ export default function OnlineUsers() {
     setSelectedImage(null); // Close modal by resetting the selected image
   };
 
-  function Avatar({ src, onClick }) {
-    return <img src={src} alt="Avatar" className="avatar" onClick={onClick} />;
-  }
 
+  const getInitialsImage = (name) => {
+    if (!name) return "https://ui-avatars.com/api/?name=User&background=random"; 
+    const formattedName = name.replace(/\s+/g, "+"); // Convert spaces to '+'
+    return `https://ui-avatars.com/api/?name=${formattedName}&background=random`;
+  };
   
   return (
     <div className="user-list-container pages-margin">
@@ -122,7 +124,12 @@ export default function OnlineUsers() {
                 className="user-list-item"
                 onClick={() => handleClick(user)}
               >
-                <Avatar src={user.photoURL} displayName={user.displayName}  onClick={() => handleImageClick(user.photoURL)} />
+              <img
+                className="avatar"
+                src={user.photoURL || getInitialsImage(user.displayName)}
+                alt={user.displayName}
+                onClick={() => handleImageClick(user.photoURL)}
+              />
                 <div className="user-info">
                   <span>{user.displayName}</span>
                   <span className="user-email">{user.email}</span> 
