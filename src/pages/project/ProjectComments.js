@@ -383,9 +383,9 @@ export default function ProjectComments({ project }) {
               ></textarea>
             </label>
 
-            <button 
-              className="btn mt-1 bg-blue-500 text-white px-4 py-2 rounded" 
-              type="submit" 
+            <button
+              className="min-h-12 bg-[var(--text-color)] rounded-xl p-4 text-white relative -top-6"
+              type="submit"
               disabled={loading}
             >
               {loading ? "Loading..." : "Add Report"}
@@ -393,26 +393,23 @@ export default function ProjectComments({ project }) {
           </form>
         )}
 
-<div className="my-6 p-4 border rounded-2xl bg-white">
-        <h3 className="text-xl font-medium mt-1">Download Comments</h3>
-        <DateRangeSelector
-          startDate={startDate}
-          endDate={endDate}
-          onStartDateChange={setStartDate}
-          onEndDateChange={setEndDate}
-        />
-        <button 
-              disabled={docloading}
-          onClick={downloadComments}
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 btn"
-        >
-         
-          {docloading ? "Generating Document..." : " Download Selected Range"}
-        </button>
+        <div className="my-6 p-4 border rounded-2xl bg-white">
+          <h3 className="text-xl font-medium mt-1">Download Comments</h3>
+          <DateRangeSelector
+            startDate={startDate}
+            endDate={endDate}
+            onStartDateChange={setStartDate}
+            onEndDateChange={setEndDate}
+          />
+          <button
+            disabled={docloading}
+            onClick={downloadComments}
+            className="min-h-10 bg-[var(--text-color)] rounded-xl p-4 text-white relative top14"
+          >
+            {docloading ? "Generating Document..." : " Download Selected Range"}
+          </button>
+        </div>
       </div>
-      </div>
-
-   
 
       <ul className="comments space-y-4" ref={commentsRef}>
         {project.comments.length > 0 &&
@@ -432,7 +429,10 @@ export default function ProjectComments({ project }) {
                 <p>{comment.content}</p>
                 <div className="comment-date text-sm text-gray-600 mt-2">
                   <p>
-                    {format(new Date(parseInt(comment.createdAt)), "HH:mm 'on' dd/MM/yyyy")}
+                    {format(
+                      new Date(parseInt(comment.createdAt)),
+                      "HH:mm 'on' dd/MM/yyyy"
+                    )}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 mt-2">
@@ -441,7 +441,10 @@ export default function ProjectComments({ project }) {
                 </div>
                 {comment.location && (
                   <div className="comment-location text-sm text-gray-600 mt-2">
-                    <p>Location: {comment.location.latitude}, {comment.location.longitude}</p>
+                    <p>
+                      Location: {comment.location.latitude},{" "}
+                      {comment.location.longitude}
+                    </p>
                   </div>
                 )}
               </div>

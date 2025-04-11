@@ -94,7 +94,7 @@ export default function ProjectTasks({ project }) {
     <div className="taskk">
       {user.uid === project.createdBy.id && (
         <>
-          <div className="add-task-form">
+          <div className="add-task-form ">
             <form onSubmit={handleSubmit}>
               <label>
                 <span>Type in a task:</span>
@@ -115,7 +115,7 @@ export default function ProjectTasks({ project }) {
                 />
                 <button
                   type="button"
-                  className="btn"
+                  className="min-h-12 bg-[var(--text-color)] rounded-xl p-4 text-white relative top-4"
                   onClick={handleAddSubtask}
                 >
                   Add Subtask
@@ -138,18 +138,23 @@ export default function ProjectTasks({ project }) {
                   placeholder="Select user(s)"
                   value={selectedUsers}
                   className="task-select"
-                  onChange={(selectedOptions) => setSelectedUsers(selectedOptions)}
+                  onChange={(selectedOptions) =>
+                    setSelectedUsers(selectedOptions)
+                  }
                 />
                 <button
                   type="button"
-                  className="btn select-all"
+                  className="min-h-12 bg-[var(--text-color)] rounded-xl p-4 text-white relative top-4"
                   onClick={handleSelectAll}
                 >
                   Select All
                 </button>
               </div>
 
-              <button type="submit" className="btn">
+              <button
+                type="submit"
+                className="min-h-12 bg-[var(--text-color)] rounded-xl p-4 text-white relative top-4"
+              >
                 Add Task
               </button>
             </form>
@@ -159,80 +164,105 @@ export default function ProjectTasks({ project }) {
         </>
       )}
 
-<div className="tasks">
-  <h2>{project.tasks.length > 0 ? "" : "No tasks yet"}</h2>
-  {project.tasks &&
-    project.tasks.map((task) => (
-      <div key={task.id} className="task">
-        <p className="task-content">{task.content.substr(0, 40)}</p>
+      <div className="tasks">
+        <h2>{project.tasks.length > 0 ? "" : "No tasks yet"}</h2>
+        {project.tasks &&
+          project.tasks.map((task) => (
+            <div key={task.id} className="task">
+              <p className="task-content">{task.content.substr(0, 40)}</p>
 
-        <div className="task-man">
-      <p>Assigned to:</p>
-      <div className="assigned-users" onClick={toggleModal}>
-        {task.assignedUsers.slice(0, 3).map((user) => (
-          <Avatar key={user.id} src={user.photoURL} className="task-img" />
-        ))}
-        {task.assignedUsers.length > 3 && (
-          <span className="more-users">+{task.assignedUsers.length - 3}</span>
-        )}
-      </div>
-
-      {isModalOpen && (
-        <Modal
-          show={isModalOpen}
-          onClose={toggleModal}
-          className="task-assigned-modal-overlay"
-        >
-          <div className="task-assigned-modal-content">
-            <h2 className="task-assigned-modal-title">Assigned Users</h2>
-            <div className="task-assigned-modal-list">
-              {task.assignedUsers.map((user) => (
-                <div
-                  key={user.id}
-                  className="task-assigned-modal-user task-assigned-user"
-                >
-                  <Avatar src={user.photoURL} className="task-assigned-avatar" />
-                  <p className="task-assigned-username">{user.displayName}</p>
+              <div className="task-man">
+                <p>Assigned to:</p>
+                <div className="assigned-users" onClick={toggleModal}>
+                  {task.assignedUsers.slice(0, 3).map((user) => (
+                    <Avatar
+                      key={user.id}
+                      src={user.photoURL}
+                      className="task-img"
+                    />
+                  ))}
+                  {task.assignedUsers.length > 3 && (
+                    <span className="more-users">
+                      +{task.assignedUsers.length - 3}
+                    </span>
+                  )}
                 </div>
-              ))}
-            </div>
-          </div>
-        </Modal>
-      )}
-    </div>
 
-        <div className="subtasks">
-          <div className="activity">ACTIVITIES</div>
-          {(task.subtasks || []).map((subtask, index) => (
-            <div key={index} className="subtask">
-              <input
-                type="checkbox"
-                checked={subtask.done}
-                onChange={(e) => handleSubtaskChange(e, task, index)}
-              />
-              <div className="stcontent">
-                <div>{subtask.content}</div>
+                {isModalOpen && (
+                  <Modal
+                    show={isModalOpen}
+                    onClose={toggleModal}
+                    className="task-assigned-modal-overlay"
+                  >
+                    <div className="task-assigned-modal-content">
+                      <h2 className="task-assigned-modal-title">
+                        Assigned Users
+                      </h2>
+                      <div className="task-assigned-modal-list">
+                        {task.assignedUsers.map((user) => (
+                          <div
+                            key={user.id}
+                            className="task-assigned-modal-user task-assigned-user"
+                          >
+                            <Avatar
+                              src={user.photoURL}
+                              className="task-assigned-avatar"
+                            />
+                            <p className="task-assigned-username">
+                              {user.displayName}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </Modal>
+                )}
+              </div>
+              <div className="mt-4">
+                <div className="text-2xl font-medium text-gray-500 uppercase tracking-wider mb-3">
+                  ACTIVITIES
+                </div>
+                {(task.subtasks || []).map((subtask, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center py-2 border-b border-gray-100 last:border-0"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={subtask.done}
+                      onChange={(e) => handleSubtaskChange(e, task, index)}
+                      className="h-4 w-4 text-green-500 rounded border-gray-300 focus:ring-green-400 mr-3 cursor-pointer"
+                    />
+                    <div
+                      className={`text-xl ${
+                        subtask.done
+                          ? "text-gray-400 line-through"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      {subtask.content}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="progress-bar">
+                <CircularProgressbar
+                  value={calculateProgress(task.subtasks || [])}
+                  text={`${Math.round(
+                    calculateProgress(task.subtasks || [])
+                  )}%`}
+                  styles={buildStyles({
+                    pathColor: "#33B06F",
+                    textColor: "#000",
+                    trailColor: "#e0e0de",
+                    textSize: "12px",
+                  })}
+                />
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="progress-bar">
-          <CircularProgressbar
-            value={calculateProgress(task.subtasks || [])}
-            text={`${Math.round(calculateProgress(task.subtasks || []))}%`}
-            styles={buildStyles({
-              pathColor: "#33B06F",
-              textColor: "#000",
-              trailColor: "#e0e0de",
-              textSize: "12px",
-            })}
-          />
-        </div>
       </div>
-    ))}
-</div>
-
     </div>
   );
 }

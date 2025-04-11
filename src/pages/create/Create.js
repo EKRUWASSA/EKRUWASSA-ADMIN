@@ -152,7 +152,10 @@ const handleSubmit = async (e) => {
         {/* {!isPending && <button className="btn">Add project</button>} */}
         {formError && <p className="error">{formError}</p>}
 
-        <button className="btn" disabled={isPending || isSubmitting}>
+        <button
+          className="min-h-12 bg-[var(--text-color)] rounded-xl p-4 text-white"
+          disabled={isPending || isSubmitting}
+        >
           {isPending || isSubmitting ? "Adding project..." : "Add project"}
         </button>
       </form>

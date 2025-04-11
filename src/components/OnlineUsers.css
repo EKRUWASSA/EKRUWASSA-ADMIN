@@ -113,7 +113,7 @@
 }
 
 .email-textarea {
-  width: 800px;
+  max-width: 800px;
   padding: 10px;
   height: 100px;
   border: 1px solid #ccc;

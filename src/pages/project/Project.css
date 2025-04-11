@@ -498,6 +498,11 @@
     flex-wrap: wrap;
     gap: 0.5rem;
   }
+  
+  .project-comments {
+    width: 90vw;
+margin-inline: 2vw;
+  }
 
   .project-comments ul {
     width: 100%;
@@ -524,14 +529,23 @@
   }
 
   .navbar {
-    flex-direction: column;
+    /* flex-direction: column; */
     align-items: center;
     gap: 1rem;
   }
 
   .taskk {
     flex-direction: column;
+    max-width: 100vw;
+    /* margin-left: 0.5rem;
+    margin-right: 0.5rem; */
   }
+
+  .add-task-form {
+  width: 95%;
+  justify-content: center;
+  margin-inline: 0.5rem;
+}
 
   .comment-image {
     height: auto;
