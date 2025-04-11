@@ -120,48 +120,58 @@ export default function ProjectSummary({ project }) {
         </button> */}
         {error && <p className="error">{error}</p>}
         {location && (
-          <p className="location">
-            Location: Lat {location.lat}, Lng {location.lng}
-          </p>
+          <div className="">
+            <p>
+              Location: Lat {location.lat}, Lng {location.lng}
+            </p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${location.lat},${location.lng}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn mt-6"
+            >
+              View Location
+            </a>
+          </div>
         )}
       </div>
 
-          <div className="">
-          <div className="manual-location-input">
-        <form onSubmit={handleManualLocationSubmit}>
-          <label>
-            <span>Latitude:</span>
-            <input 
-              type="text" 
-              name="lat" 
-              value={manualLocation.lat} 
-              onChange={handleManualLocationChange} 
-            />
-          </label>
-          <label>
-            <span>Longitude:</span>
-            <input 
-              type="text" 
-              name="lng" 
-              value={manualLocation.lng} 
-              onChange={handleManualLocationChange} 
-            />
-          </label>
-          <div className="gap-8 flex">
-          <button className="btn" type="submit" disabled={loading}>
-            {loading ? "Updating Location..." : "Set Location"}
-          </button>
+      <div className="">
+        <div className="manual-location-input">
+          <form onSubmit={handleManualLocationSubmit}>
+            <label>
+              <span>Latitude:</span>
+              <input
+                type="text"
+                name="lat"
+                value={manualLocation.lat}
+                onChange={handleManualLocationChange}
+              />
+            </label>
+            <label>
+              <span>Longitude:</span>
+              <input
+                type="text"
+                name="lng"
+                value={manualLocation.lng}
+                onChange={handleManualLocationChange}
+              />
+            </label>
+            <div className="gap-8 flex">
+              <button className="btn" type="submit" disabled={loading}>
+                {loading ? "Updating Location..." : "Set Location"}
+              </button>
 
-      {isProjectCompleted && (
-        <div className="complete">
-          <img src={Done} alt="complete" />
-          <span>Completed</span>
+              {isProjectCompleted && (
+                <div className="complete">
+                  <img src={Done} alt="complete" />
+                  <span>Completed</span>
+                </div>
+              )}
+            </div>
+          </form>
         </div>
-      )}
-          </div>
-        </form>
-</div>
-</div>
+      </div>
       <div className="add-users mt-4">
         <div className="text-xl">Add More Users:</div>
         <Select
