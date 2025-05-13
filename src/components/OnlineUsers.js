@@ -217,15 +217,19 @@ export default function OnlineUsers() {
     <div className="user-list-container pages-margin">
       <div className="header">
         <div className="add-user-form">
-        <textarea
-          value={newUserEmail}
-          onChange={(e) => setNewUserEmail(e.target.value)}
-          placeholder="Enter emails separated by commas or new lines"
-          rows="4"
-          className="email-textarea"
-        />
-          <button className="add-email-button" onClick={handleAddUser} disabled={loading}>
-            {loading ? "Adding..." : "Add Email(s)"} 
+          <textarea
+            value={newUserEmail}
+            onChange={(e) => setNewUserEmail(e.target.value)}
+            placeholder="Enter emails separated by commas or new lines"
+            rows="4"
+            className="email-textarea"
+          />
+          <button
+            className="add-email-button"
+            onClick={handleAddUser}
+            disabled={loading}
+          >
+            {loading ? "Adding..." : "Add Email(s)"}
           </button>
           {addError && <p className="error">{addError}</p>}
         </div>
@@ -241,18 +245,34 @@ export default function OnlineUsers() {
       </div>
 
       <div className="user-list" ref={dropdownRef}>
-        <h2>Registered Users ({documents ? documents.filter(
-      (currentUser) =>
-        currentUser.id !== user.uid &&
-        currentUser.displayName.toLowerCase().includes(searchQuery.toLowerCase())
-    ).length : 0})
+        <h2>
+          Registered Users (
+          {documents
+            ? documents.filter(
+                (currentUser) =>
+                  currentUser.id !== user.uid &&
+                  (currentUser.displayName
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                    currentUser.email
+                      ?.toLowerCase()
+                      .includes(searchQuery.toLowerCase()))
+              ).length
+            : 0}
+          )
         </h2>
         {error && <div className="error">{error}</div>}
         {documents &&
           documents
-            .filter((currentUser) =>
-              currentUser.id !== user.uid &&
-              currentUser.displayName.toLowerCase().includes(searchQuery.toLowerCase())
+            .filter(
+              (currentUser) =>
+                currentUser.id !== user.uid &&
+                (currentUser.displayName
+                  ?.toLowerCase()
+                  .includes(searchQuery.toLowerCase()) ||
+                  currentUser.email
+                    ?.toLowerCase()
+                    .includes(searchQuery.toLowerCase()))
             )
             .map((user) => (
               <div
@@ -267,10 +287,9 @@ export default function OnlineUsers() {
                   onClick={() => handleImageClick(user.photoURL)}
                 />
                 <div className="user-info">
-                <span>{getCompanyName(user.email)}</span>
+                  <span>{getCompanyName(user.email)}</span>
                   <span>{user.displayName}</span>
                   <span className="user-email">{user.email}</span>
-                 
                 </div>
               </div>
             ))}
@@ -289,8 +308,15 @@ export default function OnlineUsers() {
       {/* Enlarge Image Modal */}
       {selectedImage && (
         <div className="image-modal" onClick={handleCloseImageModal}>
-          <div className="image-modal-content" onClick={(e) => e.stopPropagation()}>
-            <img src={selectedImage} alt="Enlarged profile" className="enlarged-image" />
+          <div
+            className="image-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage}
+              alt="Enlarged profile"
+              className="enlarged-image"
+            />
           </div>
         </div>
       )}
