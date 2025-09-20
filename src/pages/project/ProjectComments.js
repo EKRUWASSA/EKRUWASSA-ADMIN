@@ -14,7 +14,7 @@ import {
   PageBreak
 } from 'docx';
 import { saveAs } from 'file-saver';
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 import Avatar from "../../components/Avatar";
 import { timestamp, projectStorage } from "../../firebase/config";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -52,7 +52,24 @@ const ImageModal = ({ imageUrl, onClose }) => {
   );
 };
 
-
+// Helper function to safely format dates
+const formatSafeDate = (timestamp, formatString) => {
+  try {
+    if (!timestamp) return "Date unavailable";
+    
+    // Handle both string and number timestamps
+    const date = new Date(typeof timestamp === 'string' ? parseInt(timestamp) : timestamp);
+    
+    if (!isValid(date)) {
+      return "Invalid date";
+    }
+    
+    return format(date, formatString);
+  } catch (error) {
+    console.error("Error formatting date:", error);
+    return "Date unavailable";
+  }
+};
 
 export default function ProjectComments({ project }) {
   const { updateDocument, response } = useFirestore("projects");
@@ -103,7 +120,6 @@ export default function ProjectComments({ project }) {
   const handleImageClick = (imageUrl) => {
     window.open(imageUrl, '_blank');
   };
-
 
   const getGeolocation = () => {
     return new Promise((resolve, reject) => {
@@ -188,41 +204,13 @@ export default function ProjectComments({ project }) {
       creator: "Project Report System",
       title: `Project Report - ${project.name}`,
       description: "Generated report of project comments",
-      sections: [
-        // {
-        //   properties: {
-        //     page: {
-        //       margin: {
-        //         top: 1440,
-        //         right: 1440,
-        //         bottom: 1440,
-        //         left: 1440,
-        //       },
-        //     },
-        //   },
-        //   children: [
-        //     new Paragraph({
-        //       heading: HeadingLevel.HEADING_1,
-        //       text: "Project Comments Report",
-        //       alignment: AlignmentType.CENTER,
-        //     }),
-        //     new Paragraph({
-        //       text: `Generated on ${format(new Date(), "MMMM dd, yyyy")}`,
-        //       alignment: AlignmentType.CENTER,
-        //     }),
-      
-        //   ],
-        // },
-      ],
+      sections: [],
     });
   
     const sections = [];
   
     for (const comment of comments) {
-      const commentDate = format(
-        new Date(parseInt(comment.createdAt)),
-        "MMMM dd, yyyy HH:mm"
-      );
+      const commentDate = formatSafeDate(comment.createdAt, "MMMM dd, yyyy HH:mm");
   
       sections.push(
         new Paragraph({
@@ -338,16 +326,21 @@ export default function ProjectComments({ project }) {
     return doc;
   };
   
-  
-  
   const downloadComments = async () => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     end.setHours(23, 59, 59, 999);
 
     const filteredComments = project.comments.filter((comment) => {
-      const createdAt = new Date(parseInt(comment.createdAt));
-      return createdAt >= start && createdAt <= end;
+      if (!comment.createdAt) return false;
+      
+      try {
+        const createdAt = new Date(parseInt(comment.createdAt));
+        return isValid(createdAt) && createdAt >= start && createdAt <= end;
+      } catch (error) {
+        console.error("Error parsing comment date:", error);
+        return false;
+      }
     });
 
     if (filteredComments.length === 0) {
@@ -367,7 +360,6 @@ export default function ProjectComments({ project }) {
       setdocLoading(false);
     }
   };
-
 
   return (
     <div className="project-comments">
@@ -429,10 +421,7 @@ export default function ProjectComments({ project }) {
                 <p>{comment.content}</p>
                 <div className="comment-date text-sm text-gray-600 mt-2">
                   <p>
-                    {format(
-                      new Date(parseInt(comment.createdAt)),
-                      "HH:mm 'on' dd/MM/yyyy"
-                    )}
+                    {formatSafeDate(comment.createdAt, "HH:mm 'on' dd/MM/yyyy")}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 mt-2">
